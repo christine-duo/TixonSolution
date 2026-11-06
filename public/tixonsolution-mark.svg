@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 180 180" role="img" aria-labelledby="title">
+  <title id="title">TixonSolution software mark</title>
+  <defs>
+    <linearGradient id="g" x1="18" y1="18" x2="162" y2="162" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#166534"/>
+      <stop offset=".55" stop-color="#16a34a"/>
+      <stop offset="1" stop-color="#4ade80"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#g)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 18h74c22 0 40 18 40 40v16c0 22 18 40 40 40v48H18V18Z" stroke-width="11"/>
+    <path d="M18 92h34l22 22h42v26h56" stroke-width="8"/>
+    <path d="M18 52h58l22 22h28V52h46" stroke-width="8"/>
+    <path d="M126 18v42l-24 24v76" stroke-width="8"/>
+    <path d="M58 18v28l28 28v38H66" stroke-width="8"/>
+    <path d="M18 140h48l24-24" stroke-width="8"/>
+  </g>
+  <g fill="#fff" stroke="#16a34a" stroke-width="7">
+    <circle cx="18" cy="52" r="8"/>
+    <circle cx="126" cy="18" r="8"/>
+    <circle cx="172" cy="52" r="8"/>
+    <circle cx="172" cy="140" r="8"/>
+    <circle cx="18" cy="140" r="8"/>
+    <circle cx="66" cy="112" r="8"/>
+  </g>
+  <path d="M66 96l20 20 38-42" fill="none" stroke="#16a34a" stroke-width="14" stroke-linecap="square" stroke-linejoin="miter"/>
+</svg>
