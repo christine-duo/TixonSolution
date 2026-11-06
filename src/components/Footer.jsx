@@ -43,16 +43,36 @@ const industries = [
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleSubscribe = (event) => {
+  const handleSubscribe = async (event) => {
     event.preventDefault();
     if (!email.trim()) return;
-    const subject = encodeURIComponent("New project inquiry from website");
-    const body = encodeURIComponent(
-      `Client email: ${email.trim()}\n\nI would like to discuss a project or software service with TixonSolution.`
-    );
-    setSent(true);
-    window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`;
+    setSending(true);
+    setError("");
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: SITE.web3formsAccessKey,
+          subject: "New website project inquiry",
+          from_name: "TixonSolution Website",
+          replyto: email.trim(),
+          email: email.trim(),
+          message: "A visitor requested a project discussion through the website footer.",
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.message || "Unable to send inquiry");
+      setSent(true);
+      setEmail("");
+    } catch (submissionError) {
+      setError(submissionError.message || "Unable to send inquiry. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -144,13 +164,17 @@ export default function Footer() {
               />
               <button
                 type="submit"
+                disabled={sending}
                 className="mt-3 h-12 w-full rounded-lg bg-green-600 text-sm font-bold text-white shadow-[0_8px_20px_rgba(22,163,74,.18)] transition hover:bg-green-700"
               >
-                Send Inquiry
+                {sending ? "Sending..." : "Send Inquiry"}
               </button>
             </form>
             {sent && (
-              <p className="mt-3 text-xs font-semibold text-green-700">Your email app is opening with a ready inquiry.</p>
+              <p className="mt-3 text-xs font-semibold text-green-700">Your project inquiry has been sent.</p>
+            )}
+            {error && (
+              <p className="mt-3 text-xs font-semibold text-red-600">{error}</p>
             )}
             <div className="mt-5 flex items-center justify-between gap-4">
               <Link to="/privacy-policy" className="text-[11px] font-medium text-gray-500 hover:text-green-600">

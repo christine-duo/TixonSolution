@@ -2,6 +2,7 @@ export const SITE = {
   name: "TixonSolution",
   tagline: "Custom Software & Business Solutions",
   email: "tixonsolution@gmail.com",
+  web3formsAccessKey: "1c253289-fdfb-4e0f-9aae-13dce7c7b343",
   // Leave empty so consultation requests are handled through email.
   calendlyUrl: "",
 };

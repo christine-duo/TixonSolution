@@ -732,16 +732,39 @@ function Consultation() {
     meeting: "",
     message: "",
   });
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
 
-  const handleInquirySubmit = (event) => {
+  const handleInquirySubmit = async (event) => {
     event.preventDefault();
-    const subject = encodeURIComponent(
-      `Consultation request - ${inquiry.service || "General inquiry"}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${inquiry.name}\nEmail: ${inquiry.email}\nService: ${inquiry.service}\nPreferred meeting: ${inquiry.meeting || "To be scheduled"}\n\nProject details:\n${inquiry.message}`
-    );
-    window.location.href = `mailto:${SITE.email}?subject=${subject}&body=${body}`;
+    setSending(true);
+    setError("");
+    setSent(false);
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          access_key: SITE.web3formsAccessKey,
+          subject: `Consultation request - ${inquiry.service || "General inquiry"}`,
+          from_name: inquiry.name.trim(),
+          replyto: inquiry.email.trim(),
+          email: inquiry.email.trim(),
+          service: inquiry.service,
+          preferred_meeting: inquiry.meeting || "To be scheduled",
+          message: inquiry.message.trim(),
+        }),
+      });
+      const result = await response.json();
+      if (!response.ok || !result.success) throw new Error(result.message || "Unable to send inquiry");
+      setSent(true);
+      setInquiry({ name: "", email: "", service: "", meeting: "", message: "" });
+    } catch (submissionError) {
+      setError(submissionError.message || "Unable to send inquiry. Please try again.");
+    } finally {
+      setSending(false);
+    }
   };
 
   useEffect(() => {
@@ -860,11 +883,22 @@ function Consultation() {
                     </label>
                     <button
                       type="submit"
+                      disabled={sending}
                       className="glow-btn inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white sm:col-span-2"
                     >
-                      Send Inquiry & Request Meeting
+                      {sending ? "Sending..." : "Send Inquiry & Request Meeting"}
                       <ArrowRight size={15} />
                     </button>
+                    {sent && (
+                      <p className="text-center text-sm font-semibold text-green-700 sm:col-span-2">
+                        Inquiry sent successfully. TixonSolution will contact you soon.
+                      </p>
+                    )}
+                    {error && (
+                      <p className="text-center text-sm font-semibold text-red-600 sm:col-span-2">
+                        {error}
+                      </p>
+                    )}
                   </form>
                 </div>
               )}
