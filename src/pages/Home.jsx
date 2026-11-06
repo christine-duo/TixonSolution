@@ -204,12 +204,12 @@ function Hero() {
               <div className="mx-auto mt-10 grid max-w-lg grid-cols-3 gap-2 sm:gap-4 lg:mx-0">
                 {[
                   { value: "30+", label: "Projects Delivered" },
-                  { value: "98%", label: "Client Satisfaction" },
+                  { value: "99%", label: "Client Satisfaction" },
                   { value: "24/7", label: "AI Support" },
                 ].map((stat) => (
                   <AnimatedMetric
                     key={stat.label}
-                    value={stat.label === "Projects Delivered" ? 30 : stat.label === "Client Satisfaction" ? 98 : 24}
+                    value={stat.label === "Projects Delivered" ? 30 : stat.label === "Client Satisfaction" ? 99 : 24}
                     suffix={stat.label === "Projects Delivered" ? "+" : stat.label === "Client Satisfaction" ? "%" : "/7"}
                     label={stat.label}
                   />
