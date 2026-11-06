@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="TixonSolution">
+  <defs>
+    <linearGradient id="tixon-green" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#16a34a"/>
+      <stop offset="1" stop-color="#4ade80"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="60" height="60" rx="15" fill="url(#tixon-green)"/>
+  <path
+    d="M16 16H48V24H36V50H28V24H16V16Z"
+    fill="#ffffff"
+  />
+</svg>
