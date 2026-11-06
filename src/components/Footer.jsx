@@ -157,7 +157,8 @@ export default function Footer() {
                 value={email}
                 onChange={(event) => {
                   setEmail(event.target.value);
-                  setSubscribed(false);
+                  setSent(false);
+                  setError("");
                 }}
                 placeholder="Enter your email"
                 className="h-12 w-full rounded-lg border border-green-300 bg-white px-4 text-sm outline-none transition focus:border-green-600 focus:ring-2 focus:ring-green-100"
