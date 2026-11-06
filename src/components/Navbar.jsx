@@ -56,7 +56,7 @@ export default function Navbar() {
             : "h-[68px] border-green-100/80 bg-white/80 shadow-[0_10px_32px_rgba(31,41,55,.06)] backdrop-blur-xl"
         }`}
       >
-        <Link to="/" className="group flex items-center gap-2" onClick={closeMenu}>
+        <Link to="/#home" className="group flex items-center gap-2" onClick={closeMenu}>
           <span className="text-lg font-black tracking-tight text-gray-900 sm:text-xl">
             Tixon<span className="text-green-600">Solution</span>
           </span>
